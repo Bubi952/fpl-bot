@@ -29,8 +29,10 @@ YOUTUBE_CHANNELS = [
 # jednostavno se preskoči za taj krug - ne ruši ostatak skripte.
 ARTICLE_FEEDS = [
     ("https://www.fantasyfootballscout.co.uk/feed/", "Fantasy Football Scout"),
-    ("https://www.fantasyfootballhub.co.uk/feed", "Fantasy Football Hub"),
     ("https://www.bbc.co.uk/sport/football/fantasy-football/rss.xml", "BBC Sport FPL"),
+    # Fantasy Football Hub uklonjen - njihov stari RSS URL (/feed) sad vraća 404,
+    # nisam mogao pouzdano pronaći novi. Ako znaš točan RSS link te stranice,
+    # dodaj ga ovdje kao ("URL", "Fantasy Football Hub").
 ]
 
 _TAG_RE = re.compile(r"<[^>]+>")
