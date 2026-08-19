@@ -141,14 +141,25 @@ def fetch_recent_articles(lookback_hours=4, max_per_feed=5):
     return results
 
 
+_ARTICLE_TAG_RE = re.compile(r"<article[^>]*>(.*?)</article>", re.IGNORECASE | re.DOTALL)
+_MAIN_TAG_RE = re.compile(r'<[^>]+(?:role=["\']main["\']|id=["\']main-content["\'])[^>]*>(.*?)</(?:main|div)>',
+                           re.IGNORECASE | re.DOTALL)
+
+
 def fetch_full_article_text(url, min_len_from_rss=400):
     """Pokušaj dohvatiti puni tekst stranice ako RSS opis izgleda prekratak.
+    Prvo pokuša izvući samo <article>...</article> sadržaj (izbjegava izbornike,
+    kolačiće, footer i sl.), a tek ako to ne uspije uzima cijelu stranicu.
     Vraća None ako ne uspije - tad se koristi ono što je već iz RSS-a."""
     try:
         html_text = http_get_text(url)
-        text = strip_html(html_text)
-        # heuristika: uzmi najduži "blok" teksta - stvarni članak je obično
-        # daleko najduži kontinuirani tekst na stranici
+        match = _ARTICLE_TAG_RE.search(html_text)
+        if not match:
+            match = _MAIN_TAG_RE.search(html_text)
+        if match:
+            text = strip_html(match.group(1))
+        else:
+            text = strip_html(html_text)
         return text[:8000]
     except (URLError, HTTPError):
         return None
