@@ -1,22 +1,24 @@
 {
   "seen_video_ids": [
-    "srUZPjHMtIM",
-    "-G6t3PtT4S0",
-    "UBDMs2J0wjM",
-    "8p6uJHq60UU",
-    "5XxVbxh8MEc",
+    "2M69C-kuNLU",
     "C9i0UX5d42E",
+    "srUZPjHMtIM",
+    "UBDMs2J0wjM",
+    "Y_DAU_JO_Tg",
     "2ZEDlb1s2Hc",
-    "2M69C-kuNLU"
+    "-G6t3PtT4S0",
+    "5XxVbxh8MEc",
+    "8p6uJHq60UU"
   ],
   "seen_article_urls": [
     "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide",
-    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
     "https://www.bbc.co.uk/sport/football/videos/cvgx0dngdl0o?at_medium=RSS&at_campaign=rss",
+    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/fpl-gameweek-1-team-news-wednesdays-injury-updates",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide",
     "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
-    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss"
+    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss"
   ],
   "weekly_summaries": [
     {
@@ -66,6 +68,14 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide",
       "summary": "Tom Hadley preporučuje fokus na defenzivce u cijenovnoj grupi od 5,0 milijuna, posebno na nove igrače Vuskovia i Muharemovića koji imaju odličan potencijal za prikupljanje DefCon bodova. Ballard i Bijol pokazali su solidne rezultate prošle sezone, pogotovo u domaćim utakmicama, dok se Bournemouth igrači mogu razmotriti tek iz 7. kola kada se novi sustav stabilizira.",
       "date": "2026-08-19T16:02:00.556589+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "FPL Gameweek 1 team news: Wednesday’s injury updates",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/fpl-gameweek-1-team-news-wednesdays-injury-updates",
+      "summary": "Coventry City ulazi u sezonu s nekoliko ozljeda: Haji Wright ima ozbiljnu ozljedu kvadricepsa i nedostajat će nekoliko tjedana (do 12 tjedana), dok su Jack Rudoni i Ephron Mason-Clark u borbi za Arsenal. Frank Lampard je signalizirao nove dolaske do kraja prijelaznog roka, što može utjecati na vrijeme igranja postojećih igrača - Ellis Simms je sada pod pritiskom s novim napadačima poput Sidikija Cheriefa i Taiwo Awonyija. Fantasy menadžeri trebali bi biti oprezni s Coventry igračima, posebno ako su razmišljali o njima za gameweek 2.",
+      "date": "2026-08-19T19:12:23.658237+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
