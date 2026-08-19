@@ -1,15 +1,20 @@
 {
   "seen_video_ids": [
-    "srUZPjHMtIM",
     "2ZEDlb1s2Hc",
-    "-G6t3PtT4S0",
-    "UBDMs2J0wjM"
+    "UBDMs2J0wjM",
+    "srUZPjHMtIM",
+    "5XxVbxh8MEc",
+    "C9i0UX5d42E",
+    "2M69C-kuNLU",
+    "-G6t3PtT4S0"
   ],
   "seen_article_urls": [
-    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
     "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
+    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
+    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
     "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
-    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss"
+    "https://www.bbc.co.uk/sport/football/videos/cvgx0dngdl0o?at_medium=RSS&at_campaign=rss"
   ],
   "weekly_summaries": [
     {
@@ -43,6 +48,14 @@
       "url": "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
       "summary": "Nažalost, tekst članka nije dostupan - priloženi su samo HTML kodovi i metapodaci. Vidim da se članak fokusira na pet savjeta prošlosezonskog FPL pobjednika Erika Ibsena, ali stvarni sadržaj preporuka nije vidljiv u izvoru.\n\nAko imaš pristup cijelom tekstu članka, slobodno ga podijeli pa ću napraviti sažetak na hrvatskom s fokusom na FPL savjete (transferi, izbor igrača, chipovi, itd.).",
       "date": "2026-08-19T10:33:04.980416+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "What 3.7k FPL managers think about Haaland, chip strategy + more",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
+      "summary": "Više od 3700 FPL menadžera planira Haalanda kao kapetana u prvom gameweeku (62,7%), dok je Joao Pedro najčešće odabrani igrač (82,6%). Većina planira Bench Boost u prve dvije kolo (97,5%), a Wildcard se čeka za gameweek 4 ili 6 ovisno o željenom pristupu — ranije otvaranje za napad na prve tri kola, kasnije za više informacija o momčadima i postavi.",
+      "date": "2026-08-19T14:06:02.689404+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
