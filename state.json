@@ -1,20 +1,22 @@
 {
   "seen_video_ids": [
-    "2ZEDlb1s2Hc",
-    "UBDMs2J0wjM",
     "srUZPjHMtIM",
+    "-G6t3PtT4S0",
+    "UBDMs2J0wjM",
+    "8p6uJHq60UU",
     "5XxVbxh8MEc",
     "C9i0UX5d42E",
-    "2M69C-kuNLU",
-    "-G6t3PtT4S0"
+    "2ZEDlb1s2Hc",
+    "2M69C-kuNLU"
   ],
   "seen_article_urls": [
     "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide",
     "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
-    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
     "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
-    "https://www.bbc.co.uk/sport/football/videos/cvgx0dngdl0o?at_medium=RSS&at_campaign=rss"
+    "https://www.bbc.co.uk/sport/football/videos/cvgx0dngdl0o?at_medium=RSS&at_campaign=rss",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
+    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss"
   ],
   "weekly_summaries": [
     {
@@ -56,6 +58,14 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
       "summary": "Više od 3700 FPL menadžera planira Haalanda kao kapetana u prvom gameweeku (62,7%), dok je Joao Pedro najčešće odabrani igrač (82,6%). Većina planira Bench Boost u prve dvije kolo (97,5%), a Wildcard se čeka za gameweek 4 ili 6 ovisno o željenom pristupu — ranije otvaranje za napad na prve tri kola, kasnije za više informacija o momčadima i postavi.",
       "date": "2026-08-19T14:06:02.689404+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "Best FPL defenders + midfielders for DefCon: The ultimate guide",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide",
+      "summary": "Tom Hadley preporučuje fokus na defenzivce u cijenovnoj grupi od 5,0 milijuna, posebno na nove igrače Vuskovia i Muharemovića koji imaju odličan potencijal za prikupljanje DefCon bodova. Ballard i Bijol pokazali su solidne rezultate prošle sezone, pogotovo u domaćim utakmicama, dok se Bournemouth igrači mogu razmotriti tek iz 7. kola kada se novi sustav stabilizira.",
+      "date": "2026-08-19T16:02:00.556589+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
