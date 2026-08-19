@@ -1,0 +1,43 @@
+name: FPL Tjedni Pregled
+
+on:
+  schedule:
+    # Provjerava se svaki dan u 08:30 UTC, ali skripta sama odlučuje hoće
+    # li stvarno poslati poruku (samo ponedjeljak ako je sve odigrano, ili
+    # utorak kao sigurnosna mreža). Vidi weekly_review.py za punu logiku.
+    - cron: "30 8 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Preuzmi kod
+        uses: actions/checkout@v4
+
+      - name: Postavi Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instaliraj ovisnosti
+        run: pip install -r requirements.txt
+
+      - name: Pokreni tjedni pregled
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FPL_TEAM_ID: ${{ secrets.FPL_TEAM_ID }}
+        run: python weekly_review.py
+
+      - name: Spremi stanje (state.json)
+        run: |
+          git config user.name "fpl-bot"
+          git config user.email "fpl-bot@users.noreply.github.com"
+          git add state.json
+          git diff --staged --quiet || git commit -m "Ažuriraj stanje nakon tjednog pregleda [skip ci]"
+          git push
