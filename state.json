@@ -1,7 +1,50 @@
 {
-  "seen_video_ids": [],
-  "seen_article_urls": [],
-  "weekly_summaries": [],
+  "seen_video_ids": [
+    "srUZPjHMtIM",
+    "-G6t3PtT4S0",
+    "UBDMs2J0wjM",
+    "2ZEDlb1s2Hc"
+  ],
+  "seen_article_urls": [
+    "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
+    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl"
+  ],
+  "weekly_summaries": [
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "Introducing… our new FPL Stats Centre!",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
+      "summary": "Fantasy Football Scout je lansirao novi Stats Centre s detaljnim podacima o igračima, projekcijama bodova, alatom za pronalaženje rotacija te analizom diferencijalnih igrača. Alat uključuje i DefCon analizu koja pomaže pri odabiru najjednostavnijih i najrizikovnijih opcija za svoj tim. Ova centrala bi trebala olakšati pronalaženje najboljih pickova i podignuti tvoj rang.",
+      "date": "2026-08-19T10:32:55.462156+00:00"
+    },
+    {
+      "type": "article",
+      "source": "BBC Sport FPL",
+      "title": "Top five differentials for your FPL team",
+      "url": "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
+      "summary": "Žao mi, ali dostavio si mi samo HTML kod stranice bez stvarnog sadržaja članka. Видim samo naslov \"Top five differentials for your FPL team\", ali tekst sa preporukama igrača, njihovim postotkom vlasništva i razlozima zašto su dobri transferi nije dostupan.\n\nAko imaš tekstualni dio članka sa konkretnim imenima igrača i objašnjenjima, slobodno ga pošalji pa ću ga sažeti na hrvatskom!",
+      "date": "2026-08-19T10:32:58.874042+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "How important is home advantage in FPL?",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
+      "summary": "Članak istražuje koliko je domaća prednost važna u FPL-u te analizira jesu li введeni DefCon mehanizmi izjednačili razlike između obrane domaćih i gostujućih momčadi. Tekst koristi statističke podatke kako bi dao uvid u strategiju izbora igrača ovisno o rasporedu utakmica.",
+      "date": "2026-08-19T10:33:02.430475+00:00"
+    },
+    {
+      "type": "article",
+      "source": "BBC Sport FPL",
+      "title": "I won FPL last season - here are my five best tips ",
+      "url": "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
+      "summary": "Nažalost, tekst članka nije dostupan - priloženi su samo HTML kodovi i metapodaci. Vidim da se članak fokusira na pet savjeta prošlosezonskog FPL pobjednika Erika Ibsena, ali stvarni sadržaj preporuka nije vidljiv u izvoru.\n\nAko imaš pristup cijelom tekstu članka, slobodno ga podijeli pa ću napraviti sažetak na hrvatskom s fokusom na FPL savjete (transferi, izbor igrača, chipovi, itd.).",
+      "date": "2026-08-19T10:33:04.980416+00:00"
+    }
+  ],
   "last_weekly_gw_sent": 0,
   "last_telegram_update_id": 0
 }
