@@ -233,11 +233,17 @@ def summarize_text(api_key, source_name, title, text, max_chars=6000):
     text = text[:max_chars]
     prompt = (
         f"Izvor: {source_name}\nNaslov: {title}\n\nTekst:\n{text}\n\n"
-        "Sažmi ovo u 2-3 rečenice na hrvatskom, fokusiran na FPL relevantne informacije "
+        "Ako tekst iznad NE sadrži stvaran sadržaj članka (npr. samo izbornik, kolačiće, "
+        "navigaciju, reklame ili slično 'smeće' sa stranice), odgovori TOČNO ovom jednom riječi: "
+        "NEMA_SADRZAJA - ništa drugo, bez objašnjenja.\n\n"
+        "Inače, sažmi članak u 2-3 rečenice na hrvatskom, fokusiran na FPL relevantne informacije "
         "(igrači, transferi, ozljede, preporuke, kapetan). Piši prirodnim tonom, bez uvoda "
         "tipa 'ovaj članak govori o...' - idi ravno na suštinu."
     )
-    return anthropic_call(api_key, PARAPHRASE_SYSTEM, prompt, model=HAIKU_MODEL, max_tokens=200)
+    result = anthropic_call(api_key, PARAPHRASE_SYSTEM, prompt, model=HAIKU_MODEL, max_tokens=200)
+    if "NEMA_SADRZAJA" in result.upper():
+        return None
+    return result
 
 
 # --------------------------------------------------------------------------
