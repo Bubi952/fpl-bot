@@ -107,9 +107,10 @@ def main():
             answer = anthropic_call(
                 api_key,
                 "Ti si FPL (Fantasy Premier League) asistent na hrvatskom jeziku. Odgovaraj kratko, "
-                "konkretno i korisno, koristeći dostupni kontekst. Ako nešto ne znaš iz konteksta, "
-                "iskreno reci da nemaš taj podatak umjesto da izmišljaš.",
-                prompt, model=SONNET_MODEL, max_tokens=500,
+                "konkretno i korisno, koristeći dostupni kontekst. Drži odgovor unutar otprilike "
+                "120-150 riječi - budi sažet radije nego da nabrajaš sve moguće opcije. Ako nešto ne "
+                "znaš iz konteksta, iskreno reci da nemaš taj podatak umjesto da izmišljaš.",
+                prompt, model=SONNET_MODEL, max_tokens=700,
             )
         except Exception as e:
             answer = f"Ups, nešto je pošlo po zlu: {e}"
