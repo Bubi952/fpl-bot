@@ -1,7 +1,31 @@
 {
-  "seen_video_ids": [],
-  "seen_article_urls": [],
-  "weekly_summaries": [],
+  "seen_video_ids": [
+    "YnKNKP3onhE",
+    "ZdDm3Oaud-Y"
+  ],
+  "seen_article_urls": [
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-team-news-thursdays-live-injury-updates",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2"
+  ],
+  "weekly_summaries": [
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "FPL Gameweek 1 team news: Thursday’s live injury updates",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-team-news-thursdays-live-injury-updates",
+      "summary": "Uoči 1. kola Arsenal ima Ricea i Saku spremne za nastup, dok je Bruno Guimaraes upitan, a Saliba i Timber ostaju van stroja. Chelsea očekuje Welbecka fitnim, Fofana je suspendiran dva kola, a Alonso izbjegava komentirati izvođača penala. Sunderland ima sve raspoložive osim Adingre, dok Leeds bez Gudmundssona i Gnontta zbog ozljeda hamstringa.",
+      "date": "2026-08-20T14:10:33.530699+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "What time are the Premier League press conferences on Thursday?",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
+      "summary": "U četvrtak je na rasporedu deset konferencija za medije trenera Premier lige, važnih za FPL igrače zbog informacija o ozljedama i sastavu. Raspored uključuje Artetu, Alonsa, Farkea, Glasnera i Carricka u popodnevnim terminima, dok su Jakirovic i Sage na redu ranije. Preostalih devet trenera imat će konferencije u petak, a Lampard je svoju već održao u srijedu.",
+      "date": "2026-08-20T14:10:41.117400+00:00"
+    }
+  ],
   "last_weekly_gw_sent": 0,
   "last_telegram_update_id": 0,
   "last_deadline_reminder_event": 0,
