@@ -1,9 +1,13 @@
 {
   "seen_video_ids": [
     "YnKNKP3onhE",
+    "WrySmn-ZCx4",
+    "g-8nHvMWTjc",
+    "THAmZkj0shk",
     "ZdDm3Oaud-Y"
   ],
   "seen_article_urls": [
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-team-news-thursdays-live-injury-updates",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2"
@@ -24,6 +28,14 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
       "summary": "U četvrtak je na rasporedu deset konferencija za medije trenera Premier lige, važnih za FPL igrače zbog informacija o ozljedama i sastavu. Raspored uključuje Artetu, Alonsa, Farkea, Glasnera i Carricka u popodnevnim terminima, dok su Jakirovic i Sage na redu ranije. Preostalih devet trenera imat će konferencije u petak, a Lampard je svoju već održao u srijedu.",
       "date": "2026-08-20T14:10:41.117400+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "FPL 2026/27 – Nott’m Forest: Best players, set-piece takers, predicted XI + more",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
+      "summary": "Novi trener Oliver Glasner planira 3-4-2-1 formaciju kod Forresta, što bi moglo pogodovati wing-backovima Aini i Williamsu, dok Gibbs-White ostaje ključni FPL adut nakon odličnog završetka prošle sezone. Klub je prodao Andersona Cityju za 116m, a njegovu ulogu u sredini terena trebali bi preuzeti Sangare i novi Schlager. Slaba kućna forma i nedostatak golova ostaju briga, uz Jesusa kao igrača koji podbacuje ispod svog xG-a na domaćem terenu.",
+      "date": "2026-08-20T16:04:39.564205+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
