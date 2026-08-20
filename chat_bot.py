@@ -5,18 +5,36 @@ Telegram poruke i odgovara na pitanja uživo (npr. "Haaland ili Salah za
 kapetana?"). Koristi svježe FPL podatke + tvoju ekipu (ako je postavljen
 FPL_TEAM_ID) + sažetke prikupljene ovaj tjedan kao kontekst za AI (Sonnet).
 
+Podržava i SLIKE - ako pošalješ botu screenshot svoje FPL momčadi (npr.
+prije sezone, dok API još ne otkriva tim preko Team ID-a), AI "pročita"
+igrače sa slike i da ocjenu/preporuke koristeći dostupne podatke o formi
+i rasporedu. Dodaj poruku (caption) uz sliku za konkretnije pitanje, ili
+je pošalji bez teksta za opću analizu.
+
 VAŽNO ZA SIGURNOST: bot odgovara SAMO na poruke iz chata čiji ID odgovara
 TELEGRAM_CHAT_ID - inače bi netko drugi tko sazna korisničko ime tvog bota
-mogao trošiti tvoj Anthropic API budžet slanjem poruka.
+mogao trošiti tvoj Anthropic API budžet slanjem poruka/slika.
 """
 
 import os
 import sys
+import base64
 
 from common import (
     fetch_fpl, upcoming_fixtures_by_team, score_players, fetch_team_squad,
-    send_telegram, get_telegram_updates, load_state, save_state,
-    anthropic_call, SONNET_MODEL,
+    send_telegram, get_telegram_updates, get_telegram_file_bytes,
+    load_state, save_state, anthropic_call, SONNET_MODEL,
+)
+
+SYSTEM_PROMPT = (
+    "Ti si FPL (Fantasy Premier League) asistent na hrvatskom jeziku. Odgovaraj kratko, "
+    "konkretno i korisno, koristeći dostupni kontekst. Drži odgovor unutar otprilike "
+    "120-180 riječi - budi sažet radije nego da nabrajaš sve moguće opcije. Ako nešto ne "
+    "znaš iz konteksta, iskreno reci da nemaš taj podatak umjesto da izmišljaš.\n\n"
+    "Ako korisnik pošalje SLIKU svoje FPL momčadi (npr. screenshot iz aplikacije), pažljivo "
+    "pročitaj imena igrača i formaciju sa slike, prepoznaj kapetana (obično oznaka 'C') i "
+    "vice-kapetana ('VC'), te daj kratku ocjenu momčadi i 2-3 konkretna prijedloga "
+    "(transfer, kapetan, ili formacija) koristeći podatke o formi i rasporedu iz konteksta."
 )
 
 
@@ -32,7 +50,7 @@ def build_context(bootstrap, fixtures, weekly_summaries):
         top_by_pos.append(", ".join(f"{p['web_name']} (£{p['_price']:.1f}m, forma {p['_form']:.1f}, FDR {p['_fdr']:.1f})" for p in pool))
 
     team_id = os.environ.get("FPL_TEAM_ID", "").strip()
-    squad_text = "Korisnik nije povezao svoj FPL tim."
+    squad_text = "Korisnik nije povezao svoj FPL tim (ili sezona još nije počela pa API ne otkriva postavu)."
     if team_id:
         try:
             squad_data = fetch_team_squad(int(team_id), bootstrap, players_by_id)
@@ -54,9 +72,31 @@ def build_context(bootstrap, fixtures, weekly_summaries):
     return (
         f"TOP IGRAČI PO POZICIJI (forma+ICT+fixture formula):\n"
         f"GK: {top_by_pos[0]}\nDEF: {top_by_pos[1]}\nMID: {top_by_pos[2]}\nFWD: {top_by_pos[3]}\n\n"
-        f"TVOJA EKIPA:\n{squad_text}\n\n"
+        f"TVOJA EKIPA (preko FPL API-ja, ako je dostupno):\n{squad_text}\n\n"
         f"NEDAVNA MIŠLJENJA ANALITIČARA:\n{recent_opinions}"
     )
+
+
+def collect_items(results, chat_id):
+    """Vrati listu {'type': 'text', 'text': ...} ili {'type': 'photo', 'file_id': ..., 'caption': ...}
+    samo za poruke iz ovlaštenog chata, i najveći update_id obrađen."""
+    items = []
+    max_update_id = 0
+    for u in results:
+        max_update_id = max(max_update_id, u["update_id"])
+        msg = u.get("message") or u.get("edited_message")
+        if not msg:
+            continue
+        incoming_chat_id = str(msg["chat"]["id"])
+        if incoming_chat_id != str(chat_id):
+            print(f"[sigurnost] Ignoriram poruku iz neovlaštenog chata {incoming_chat_id}.")
+            continue
+        if "photo" in msg and msg["photo"]:
+            largest = msg["photo"][-1]  # Telegram šalje uzlazno po veličini
+            items.append({"type": "photo", "file_id": largest["file_id"], "caption": msg.get("caption", "")})
+        elif "text" in msg:
+            items.append({"type": "text", "text": msg["text"]})
+    return items, max_update_id
 
 
 def main():
@@ -76,46 +116,48 @@ def main():
         print("Nema novih poruka.")
         return
 
-    questions = []
-    max_update_id = last_update_id
-    for u in results:
-        max_update_id = max(max_update_id, u["update_id"])
-        msg = u.get("message") or u.get("edited_message")
-        if not msg or "text" not in msg:
-            continue
-        incoming_chat_id = str(msg["chat"]["id"])
-        if incoming_chat_id != str(chat_id):
-            print(f"[sigurnost] Ignoriram poruku iz neovlaštenog chata {incoming_chat_id}.")
-            continue
-        questions.append(msg["text"])
-
-    state["last_telegram_update_id"] = max_update_id
+    items, max_update_id = collect_items(results, chat_id)
+    state["last_telegram_update_id"] = max(last_update_id, max_update_id)
     save_state(state)
 
-    if not questions:
-        print("Nema pitanja od ovlaštenog korisnika.")
+    if not items:
+        print("Nema poruka od ovlaštenog korisnika.")
         return
 
-    print(f"Dohvaćam FPL podatke za {len(questions)} pitanje/a...")
+    print(f"Dohvaćam FPL podatke za {len(items)} poruku/a...")
     bootstrap, fixtures = fetch_fpl()
     weekly_summaries = state.get("weekly_summaries", [])
     context = build_context(bootstrap, fixtures, weekly_summaries)
 
-    for question in questions:
-        prompt = f"KONTEKST:\n{context}\n\nPITANJE KORISNIKA: {question}"
-        try:
-            answer = anthropic_call(
-                api_key,
-                "Ti si FPL (Fantasy Premier League) asistent na hrvatskom jeziku. Odgovaraj kratko, "
-                "konkretno i korisno, koristeći dostupni kontekst. Drži odgovor unutar otprilike "
-                "120-150 riječi - budi sažet radije nego da nabrajaš sve moguće opcije. Ako nešto ne "
-                "znaš iz konteksta, iskreno reci da nemaš taj podatak umjesto da izmišljaš.",
-                prompt, model=SONNET_MODEL, max_tokens=700,
-            )
-        except Exception as e:
-            answer = f"Ups, nešto je pošlo po zlu: {e}"
+    for item in items:
+        if item["type"] == "photo":
+            try:
+                img_bytes, mime = get_telegram_file_bytes(bot_token, item["file_id"])
+                b64_data = base64.b64encode(img_bytes).decode("utf-8")
+                user_prompt = item["caption"] or (
+                    "Ovo je screenshot moje FPL momčadi. Pročitaj igrače sa slike, "
+                    "daj mi ocjenu momčadi i konkretne prijedloge za poboljšanje."
+                )
+                content = [
+                    {"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64_data}},
+                    {"type": "text", "text": f"KONTEKST:\n{context}\n\n{user_prompt}"},
+                ]
+                answer = anthropic_call(api_key, SYSTEM_PROMPT, content, model=SONNET_MODEL, max_tokens=800)
+            except Exception as e:
+                answer = f"Ups, ne mogu analizirati sliku: {e}"
+            print("Odgovoreno na: [slika]")
+        else:
+            prompt = f"KONTEKST:\n{context}\n\nPITANJE KORISNIKA: {item['text']}"
+            try:
+                answer = anthropic_call(api_key, SYSTEM_PROMPT, prompt, model=SONNET_MODEL, max_tokens=700)
+            except Exception as e:
+                answer = f"Ups, nešto je pošlo po zlu: {e}"
+            print(f"Odgovoreno na: {item['text'][:60]}")
         send_telegram(answer, bot_token, chat_id)
-        print(f"Odgovoreno na: {question[:60]}")
+
+
+if __name__ == "__main__":
+    main()
 
 
 if __name__ == "__main__":
