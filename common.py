@@ -243,7 +243,7 @@ def summarize_text(api_key, source_name, title, text, max_chars=6000):
         "tonom, bez uvoda tipa 'ovaj članak govori o...' - idi ravno na suštinu. Uvijek završi "
         "rečenicu do kraja, nemoj je ostaviti napola."
     )
-    result = anthropic_call(api_key, PARAPHRASE_SYSTEM, prompt, model=HAIKU_MODEL, max_tokens=350)
+    result = anthropic_call(api_key, PARAPHRASE_SYSTEM, prompt, model=SONNET_MODEL, max_tokens=350)
     if "NEMA_SADRZAJA" in result.upper():
         return None
     return result
