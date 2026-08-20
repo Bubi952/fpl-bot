@@ -23,8 +23,9 @@ import datetime as dt
 from common import (
     esc, fetch_fpl, current_and_next_event, upcoming_fixtures_by_team,
     avg_difficulty, score_players, fetch_team_squad, send_telegram,
-    load_state, save_state, anthropic_call, SONNET_MODEL, POS_LABEL,
+    send_telegram_photo, load_state, save_state, anthropic_call, SONNET_MODEL, POS_LABEL,
 )
+from chart import render_rank_value_chart
 
 
 def get_current_event(bootstrap):
@@ -190,6 +191,35 @@ def main():
 
     print("Šaljem na Telegram...")
     send_telegram(message, bot_token, chat_id)
+
+    # zapiši povijest ranga/vrijednosti i pošalji grafikon ako imamo dovoljno podataka
+    team_id = os.environ.get("FPL_TEAM_ID", "").strip()
+    if team_id:
+        try:
+            fx_map = upcoming_fixtures_by_team(fixtures)
+            players = score_players(bootstrap, fx_map)
+            players_by_id = {p["id"]: p for p in players}
+            squad_data = fetch_team_squad(int(team_id), bootstrap, players_by_id)
+            if squad_data:
+                info = squad_data["info"]
+                history = state.get("history", [])
+                # izbjegni duple unose za isto kolo ako se ovo ikad pokrene dvaput za isti gw
+                history = [h for h in history if h["gw"] != current_event["id"]]
+                history.append({
+                    "gw": current_event["id"],
+                    "rank": info.get("summary_overall_rank") or 0,
+                    "value": (info.get("last_deadline_value") or 1000) / 10,
+                    "points": info.get("summary_overall_points") or 0,
+                })
+                history.sort(key=lambda h: h["gw"])
+                state["history"] = history[-20:]  # zadnjih 20 kola je dovoljno
+
+                chart_bytes = render_rank_value_chart(state["history"])
+                if chart_bytes:
+                    send_telegram_photo(bot_token, chat_id, chart_bytes,
+                                         caption="📈 Tvoj rang i vrijednost tima kroz sezonu")
+        except Exception as e:
+            print(f"[upozorenje] Grafikon ranga nije uspio: {e}", file=sys.stderr)
 
     state["last_weekly_gw_sent"] = current_event["id"]
     state["weekly_summaries"] = []  # reset za idući tjedan

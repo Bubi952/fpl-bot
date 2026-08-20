@@ -13,9 +13,55 @@ import os
 import sys
 import datetime as dt
 
-from common import esc, send_telegram, load_state, save_state, summarize_text
+from common import esc, send_telegram, load_state, save_state, summarize_text, fetch_fpl, upcoming_fixtures_by_team, score_players, fetch_team_squad
 from sources import fetch_recent_youtube_videos, fetch_recent_articles, fetch_full_article_text
 from video_transcripts import get_transcript_text
+
+
+def check_squad_alerts(state):
+    """Provjerava JESU LI se promijenili status/vijesti kod igrača u korisnikovoj
+    stvarnoj ekipi (ne svih igrača u ligi) - da se sazna odmah, ne tek u
+    sljedećem dnevnom izvještaju. Vraća (alert_blocks, updated_status_map)."""
+    team_id = os.environ.get("FPL_TEAM_ID", "").strip()
+    if not team_id:
+        return [], state.get("squad_status", {})
+
+    try:
+        bootstrap, fixtures = fetch_fpl()
+        fx_map = upcoming_fixtures_by_team(fixtures)
+        players = score_players(bootstrap, fx_map)
+        players_by_id = {p["id"]: p for p in players}
+        squad_data = fetch_team_squad(int(team_id), bootstrap, players_by_id)
+    except Exception as e:
+        print(f"[upozorenje] Provjera ekipe nije uspjela: {e}")
+        return [], state.get("squad_status", {})
+
+    if not squad_data:
+        return [], state.get("squad_status", {})
+
+    old_status = state.get("squad_status", {})
+    new_status = {}
+    alerts = []
+    for s in squad_data["squad"]:
+        p = s["player"]
+        if not p:
+            continue
+        pid = str(p["id"])
+        current = {"status": p.get("status"), "news": p.get("news", "")}
+        new_status[pid] = current
+        prev = old_status.get(pid)
+        if prev is None:
+            continue  # prvi put vidimo ovog igrača, nema "promjene" za javiti
+        changed_bad = (prev.get("status") == "a" and current["status"] != "a") or \
+                      (current["news"] and current["news"] != prev.get("news"))
+        if changed_bad:
+            chance = p.get("chance_of_playing_next_round")
+            chance_s = f"{chance}%" if chance is not None else "?"
+            alerts.append(
+                f"🚨 <b>PROMJENA KOD TVOG IGRAČA:</b> {esc(p['web_name'])} — {chance_s} "
+                f"šanse za igranje" + (f" — {esc(current['news'])}" if current["news"] else "")
+            )
+    return alerts, new_status
 
 
 def main():
@@ -34,6 +80,10 @@ def main():
     weekly_summaries = state.get("weekly_summaries", [])
 
     message_blocks = []
+
+    # ---- Upozorenja za TVOJU ekipu (prioritet, provjerava se prvo) ----
+    squad_alerts, updated_squad_status = check_squad_alerts(state)
+    message_blocks.extend(squad_alerts)
 
     # ---- Videi ----
     videos = fetch_recent_youtube_videos(lookback_hours=lookback)
@@ -88,6 +138,7 @@ def main():
     state["seen_video_ids"] = list(seen_videos)
     state["seen_article_urls"] = list(seen_articles)
     state["weekly_summaries"] = weekly_summaries
+    state["squad_status"] = updated_squad_status
     save_state(state)
 
     if not message_blocks:

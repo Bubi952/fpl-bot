@@ -213,6 +213,18 @@ def get_telegram_file_bytes(bot_token, file_id):
     return data, mime
 
 
+def send_telegram_photo(bot_token, chat_id, image_bytes, caption=""):
+    """Šalje sliku (npr. grafikon) na Telegram. Koristi 'requests' za multipart
+    upload jer je znatno jednostavniji od ručnog sastavljanja multipart forme."""
+    import requests
+    url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
+    files = {"photo": ("chart.png", image_bytes, "image/png")}
+    data = {"chat_id": chat_id, "caption": caption[:1024]}
+    resp = requests.post(url, data=data, files=files, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
 # --------------------------------------------------------------------------
 # Anthropic API
 # --------------------------------------------------------------------------
@@ -273,6 +285,9 @@ DEFAULT_STATE = {
     "weekly_summaries": [],
     "last_weekly_gw_sent": 0,
     "last_telegram_update_id": 0,
+    "last_deadline_reminder_event": 0,
+    "squad_status": {},
+    "history": [],
 }
 
 
