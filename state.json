@@ -1,16 +1,21 @@
 {
   "seen_video_ids": [
-    "YnKNKP3onhE",
+    "DieOrPr4nx0",
     "WrySmn-ZCx4",
+    "YnKNKP3onhE",
+    "QZhu4GM26KQ",
+    "ZdDm3Oaud-Y",
+    "ElU2tZSkeD4",
+    "qEHHVuU_rX0",
     "g-8nHvMWTjc",
-    "THAmZkj0shk",
-    "ZdDm3Oaud-Y"
+    "THAmZkj0shk"
   ],
   "seen_article_urls": [
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-team-news-thursdays-live-injury-updates",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2"
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-scout-picks-arsenal-man-utd-triple-ups",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more"
   ],
   "weekly_summaries": [
     {
@@ -36,6 +41,14 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
       "summary": "Novi trener Oliver Glasner planira 3-4-2-1 formaciju kod Forresta, što bi moglo pogodovati wing-backovima Aini i Williamsu, dok Gibbs-White ostaje ključni FPL adut nakon odličnog završetka prošle sezone. Klub je prodao Andersona Cityju za 116m, a njegovu ulogu u sredini terena trebali bi preuzeti Sangare i novi Schlager. Slaba kućna forma i nedostatak golova ostaju briga, uz Jesusa kao igrača koji podbacuje ispod svog xG-a na domaćem terenu.",
       "date": "2026-08-20T16:04:39.564205+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "FPL Gameweek 1 Scout Picks: Arsenal + Man Utd triple-ups",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-scout-picks-arsenal-man-utd-triple-ups",
+      "summary": "Scout Picks za Gameweek 1 najavljuju formacije s naglaskom na trostruke odabire iz Arsenala i Manchester Uniteda, uz budžet od £83m za početnih XI. Za vratara je odabran Bart Verbruggen (£4.5m) zbog dobrog Brightonovog defenzivnog učinka prošle sezone i čistih mreža u pripremnim utakmicama, dok Aston Villa dolazi oslabljena ozljedama i odlascima napadača.",
+      "date": "2026-08-20T19:45:58.104643+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
