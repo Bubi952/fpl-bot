@@ -1,25 +1,29 @@
 {
   "seen_video_ids": [
-    "5XxVbxh8MEc",
     "8p6uJHq60UU",
-    "UBDMs2J0wjM",
-    "C9i0UX5d42E",
-    "srUZPjHMtIM",
+    "5XxVbxh8MEc",
     "Y_DAU_JO_Tg",
-    "2M69C-kuNLU",
+    "srUZPjHMtIM",
     "-G6t3PtT4S0",
-    "2ZEDlb1s2Hc"
+    "UBDMs2J0wjM",
+    "2ZEDlb1s2Hc",
+    "2M69C-kuNLU",
+    "C9i0UX5d42E"
   ],
   "seen_article_urls": [
-    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
     "https://www.bbc.co.uk/sport/football/articles/c3ekq87e214o?at_medium=RSS&at_campaign=rss",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/fpl-gameweek-1-team-news-wednesdays-injury-updates",
     "https://www.fantasyfootballscout.co.uk/2026/08/19/fpl-generals-gameweek-1-team-reveal-bench-boost-active",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/who-are-the-best-coventry-attackers-for-a-gameweek-2-bench-boost",
     "https://www.bbc.co.uk/sport/football/videos/cvgx0dngdl0o?at_medium=RSS&at_campaign=rss",
-    "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide"
+    "https://www.bbc.co.uk/sport/football/videos/clylq8kj3e8o?at_medium=RSS&at_campaign=rss",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/best-fpl-defenders-midfielders-for-defcon-the-ultimate-guide",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/how-important-is-home-advantage-in-fpl",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/will-anderson-be-a-better-or-worse-fpl-pick-at-man-city",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-leeds-best-players-set-piece-takers-predicted-xi-more",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/fpl-gameweek-1-team-news-wednesdays-injury-updates",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/introducing-our-new-fpl-stats-centre",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-liverpool-best-players-set-piece-takers-predicted-xi-more",
+    "https://www.fantasyfootballscout.co.uk/2026/08/19/what-3-7k-fpl-managers-think-about-haaland-chip-strategy-more"
   ],
   "weekly_summaries": [
     {
@@ -77,6 +81,38 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/19/fpl-gameweek-1-team-news-wednesdays-injury-updates",
       "summary": "Coventry City ulazi u sezonu s nekoliko ozljeda: Haji Wright ima ozbiljnu ozljedu kvadricepsa i nedostajat će nekoliko tjedana (do 12 tjedana), dok su Jack Rudoni i Ephron Mason-Clark u borbi za Arsenal. Frank Lampard je signalizirao nove dolaske do kraja prijelaznog roka, što može utjecati na vrijeme igranja postojećih igrača - Ellis Simms je sada pod pritiskom s novim napadačima poput Sidikija Cheriefa i Taiwo Awonyija. Fantasy menadžeri trebali bi biti oprezni s Coventry igračima, posebno ako su razmišljali o njima za gameweek 2.",
       "date": "2026-08-19T19:12:23.658237+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "FPL 2026/27 – Liverpool: Best players, set-piece takers, predicted XI + more",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-liverpool-best-players-set-piece-takers-predicted-xi-more",
+      "summary": "Liverpool ima odličan raspored u prve četiri gameweeka (Newcastle, Nottingham Forest, Ipswich, Fulham, Bournemouth), što ih čini atraktivnim za prve timove, pogotovo prije trotjednog pauze nakon GW5 – idealna prigoda za Wildcard. Andoni Iraola donosi napadački stil iz Bournemoutha s Florian Wirtom i Alexander Isakom kao ključnim igračima, ali klub je oslabljen odlaskom Salaha, ozljedom Ekitikea te napuštanjem Diomandeija te Robertsona, što stvara rupu u dubini napadačkog redova. Munoz, Ngumoha, Gakpo i Isak ostaju solidne opcije, no Iraolini će veliki iz",
+      "date": "2026-08-20T03:13:20.406608+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "Who are the best Coventry attackers for a Gameweek 2 Bench Boost?",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/who-are-the-best-coventry-attackers-for-a-gameweek-2-bench-boost",
+      "summary": "Coventry je kao pobjednika Championshipa imao snažan napad s 97 golova sezone, što čini njihove igrače zanimljivima za FPL. Najbolji izbor su Haji Wright (najčešće korišteni napadač, 17 golova) i Victor Torp (10 golova, česta zamjena), ali konkurencija je pojačana dolaskom igrača poput Gustava Hamerca (12 asistencija prošle sezone) i Caleба Yirenkiija koji bi mogao donijeti dodatne defencivne poene. Iako Coventry čini lijepe prilike za napade, njihovi rezervni igrači će suočavati se s ograničenim minutažom zbog ojačane konkurencije u timu.",
+      "date": "2026-08-20T03:13:24.909815+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "FPL 2026/27 – Leeds: Best players, set-piece takers, predicted XI + more",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-leeds-best-players-set-piece-takers-predicted-xi-more",
+      "summary": "Leeds je odličan izbor za obranu s tri domaće utakmice među prvih pet gameweeka – njihova obrana je bila sedma po broju primljenih golova nakon zime, a novi golman Trafford bi mogao dodatno poboljšati rezultate. Nove pojave Wilson i Muharemovic dolaze s ambicijama, ali pazite na rotacije obrane koju je ojačao i Elvedi, što može umanjiti bodovanje za Rodona i Bijola. U pripremi su se ističi Calvert-Lewin s tri gola, dok je Aaronson dao dva gola i dvije asistencije.",
+      "date": "2026-08-20T03:13:29.100691+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "Will Anderson be a better or worse FPL pick at Man City?",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/will-anderson-be-a-better-or-worse-fpl-pick-at-man-city",
+      "summary": "Elliot Anderson stiže u Manchester City za rekordnih 116 milijuna funti kao britanski nogometaš. Prošle sezone je bio peti po bodovima među veznjačima (180 bodova) zahvaljujući izvanrednom broju defenzivnih akcija (52 DefCon boda), što ga čini zanimljivim FPL izborom. Glavna pitanja za нову sezonu su hoće li zadržati set-piece dužnosti na Etihadu i hoće li mu City-jev posjednički stil igre smanjiti broj oporavki lopte koji su ga učinili zvijezdom u Nottinghamu.",
+      "date": "2026-08-20T03:13:32.949967+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
