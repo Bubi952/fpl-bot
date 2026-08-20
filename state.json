@@ -1,21 +1,24 @@
 {
   "seen_video_ids": [
-    "DieOrPr4nx0",
-    "WrySmn-ZCx4",
-    "YnKNKP3onhE",
-    "QZhu4GM26KQ",
-    "ZdDm3Oaud-Y",
+    "mcR6TdK76UU",
     "ElU2tZSkeD4",
     "qEHHVuU_rX0",
+    "QZhu4GM26KQ",
+    "WrySmn-ZCx4",
+    "Wov-yx15YFg",
+    "ZdDm3Oaud-Y",
     "g-8nHvMWTjc",
-    "THAmZkj0shk"
+    "YnKNKP3onhE",
+    "THAmZkj0shk",
+    "DieOrPr4nx0"
   ],
   "seen_article_urls": [
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-team-news-thursdays-live-injury-updates",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-scout-picks-arsenal-man-utd-triple-ups",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/kdh-or-ndiaye-bench-boost-picks-spurs-defence-fpl-qa",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2",
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more"
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-scout-picks-arsenal-man-utd-triple-ups"
   ],
   "weekly_summaries": [
     {
@@ -49,6 +52,14 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-scout-picks-arsenal-man-utd-triple-ups",
       "summary": "Scout Picks za Gameweek 1 najavljuju formacije s naglaskom na trostruke odabire iz Arsenala i Manchester Uniteda, uz budžet od £83m za početnih XI. Za vratara je odabran Bart Verbruggen (£4.5m) zbog dobrog Brightonovog defenzivnog učinka prošle sezone i čistih mreža u pripremnim utakmicama, dok Aston Villa dolazi oslabljena ozljedama i odlascima napadača.",
       "date": "2026-08-20T19:45:58.104643+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "KDH or Ndiaye, Bench Boost picks, Spurs defence: FPL Q&A",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/20/kdh-or-ndiaye-bench-boost-picks-spurs-defence-fpl-qa",
+      "summary": "Tom Freeman u FPL Q&A preporučuje Ndiaya ispred Dewsbury-Halla zbog cijene i boljih DefCon brojki. Kod Spursa savjetuje van Hecke umjesto skupljeg Senesija, dok je Tonali za Bench Boost rizičan izbor u odnosu na Sangarea i Grossa, koji su top £5.5m opcije. Diego Gomez je solidan kratkoročni izbor zbog ozljeda Mitome i Minteha, a Freeman najavljuje 4-4-2 formaciju u prvom gameweeku s naglaskom na branitelje poput Tarkowskog.",
+      "date": "2026-08-20T21:58:07.485697+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
