@@ -199,6 +199,20 @@ def get_telegram_updates(bot_token, offset=None, timeout=0):
     return http_get_json(url)
 
 
+def get_telegram_file_bytes(bot_token, file_id):
+    """Preuzima sliku koju je korisnik poslao botu na Telegramu (npr. screenshot
+    svog FPL tima). Vraća (raw_bytes, mime_type)."""
+    info = http_get_json(f"https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}")
+    file_path = info["result"]["file_path"]
+    url = f"https://api.telegram.org/file/bot{bot_token}/{file_path}"
+    req = Request(url, headers={"User-Agent": UA})
+    with urlopen(req, timeout=30) as resp:
+        data = resp.read()
+    ext = file_path.rsplit(".", 1)[-1].lower() if "." in file_path else "jpg"
+    mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp"}.get(ext, "image/jpeg")
+    return data, mime
+
+
 # --------------------------------------------------------------------------
 # Anthropic API
 # --------------------------------------------------------------------------
