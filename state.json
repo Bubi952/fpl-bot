@@ -1,25 +1,31 @@
 {
   "seen_video_ids": [
-    "QZhu4GM26KQ",
-    "g-8nHvMWTjc",
     "Wov-yx15YFg",
     "mcR6TdK76UU",
-    "YnKNKP3onhE",
-    "qEHHVuU_rX0",
     "ElU2tZSkeD4",
-    "ZdDm3Oaud-Y",
+    "hGXBQ7-Ct50",
+    "IGn32RyflMk",
+    "DieOrPr4nx0",
+    "81Y1-nLvnPs",
+    "PH6SVcF5JjA",
+    "G9Yph58drSw",
+    "g-8nHvMWTjc",
     "THAmZkj0shk",
+    "QZhu4GM26KQ",
     "WrySmn-ZCx4",
-    "DieOrPr4nx0"
+    "YnKNKP3onhE",
+    "ZdDm3Oaud-Y",
+    "qEHHVuU_rX0"
   ],
   "seen_article_urls": [
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/kdh-or-ndiaye-bench-boost-picks-spurs-defence-fpl-qa",
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2",
+    "https://www.fantasyfootballscout.co.uk/2026/08/21/fpl-2026-27-spurs-best-players-set-piece-takers-predicted-xi-more",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-team-news-thursdays-live-injury-updates",
-    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/what-time-are-the-premier-league-press-conferences-on-thursday",
+    "https://www.fantasyfootballscout.co.uk/2026/08/21/who-is-the-best-captain-for-fpl-gameweek-1-4",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/the-scout-squad-our-top-picks-for-fpl-gameweek-1-2",
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-2026-27-nottm-forest-best-players-set-piece-takers-predicted-xi-more",
     "https://www.fantasyfootballscout.co.uk/2026/08/20/fpl-gameweek-1-scout-picks-arsenal-man-utd-triple-ups",
-    "https://www.fantasyfootballscout.co.uk/2026/08/21/fpl-2026-27-spurs-best-players-set-piece-takers-predicted-xi-more"
+    "https://www.fantasyfootballscout.co.uk/2026/08/20/kdh-or-ndiaye-bench-boost-picks-spurs-defence-fpl-qa"
   ],
   "weekly_summaries": [
     {
@@ -69,6 +75,14 @@
       "url": "https://www.fantasyfootballscout.co.uk/2026/08/21/fpl-2026-27-spurs-best-players-set-piece-takers-predicted-xi-more",
       "summary": "Tottenham je ovog ljeta doveo šest pojačanja (Tonali, Fernandes, van Hecke, Senesi, Robertson, Dubravka), no napad ostaje slab - prošle sezone bili su 17. po xG, a napadački trio za Gameweek 1 vjerojatno čine Richarlison, Tel i Moore. Kod kuće su bili katastrofalni (samo 15 bodova), dok je forma pod De Zerbijem na kraju sezone bila solidna. Raspored se otvara teško, ali poboljšava od Gameweeka 7, što bi mogao biti trenutak za ulazak Spursovih igrača u FPL sastave.",
       "date": "2026-08-21T03:31:30.724357+00:00"
+    },
+    {
+      "type": "article",
+      "source": "Fantasy Football Scout",
+      "title": "Who is the best captain for FPL Gameweek 1?",
+      "url": "https://www.fantasyfootballscout.co.uk/2026/08/21/who-is-the-best-captain-for-fpl-gameweek-1-4",
+      "summary": "Uoči prvog gameweeka, izbor kapetana svodi se prvenstveno na Haalanda i Bruna Fernandesa, dvojicu najboljih igrača prošle sezone. Anketa na stranici pokazuje Haalanda kao favorita s oko 34% glasova, ispred Fernandesa s 27%. Mbeumo je treća opcija s preko 10% podrške zahvaljujući dobroj pretsezoni, dok Tzolis i Gabriel bilježe rastuću popularnost kao kapetanski izbori.",
+      "date": "2026-08-21T08:04:28.204607+00:00"
     }
   ],
   "last_weekly_gw_sent": 0,
