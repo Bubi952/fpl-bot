@@ -1,14 +1,11 @@
-name: FPL Chat Bot i Podsjetnik za Rok
+name: FPL Podsjetnik za Rok
 
 on:
   schedule:
-    # Svaka 5 minute - provjerava ima li novih pitanja na Telegramu I je li
-    # blizu gameweek rok (šalje podsjetnik samo jednom, ~3h prije roka).
-    # NAPOMENA: uz ovako čest raspored, repozitorij MORA biti Public da bi
-    # GitHub Actions ostao potpuno besplatan (privatni repo ima limit od
-    # 2000 min/mjesec, a ovo samo trosi oko 8600 min/mjesec).
-    # Vidi README.md za detalje.
-    - cron: "*/5 * * * *"
+    # Svakih 15 min - provjerava je li blizu gameweek rok (šalje samo
+    # jednom po roku, ~3h prije). Chat pitanja se sad rješavaju odvojeno,
+    # trenutno, preko Cloudflare webhooka (vidi chat-webhook.yml).
+    - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -29,14 +26,6 @@ jobs:
       - name: Instaliraj ovisnosti
         run: pip install -r requirements.txt
 
-      - name: Odgovori na nova pitanja
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          FPL_TEAM_ID: ${{ secrets.FPL_TEAM_ID }}
-        run: python chat_bot.py
-
       - name: Provjeri je li blizu gameweek rok
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -49,7 +38,7 @@ jobs:
           git config user.name "fpl-bot"
           git config user.email "fpl-bot@users.noreply.github.com"
           git add state.json
-          git diff --staged --quiet || git commit -m "Ažuriraj stanje chata/podsjetnika [skip ci]"
+          git diff --staged --quiet || git commit -m "Ažuriraj stanje podsjetnika [skip ci]"
           git push
 
       - name: Javi na Telegram ako je nešto puklo
@@ -57,4 +46,4 @@ jobs:
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d text="⚠️ FPL Bot: workflow 'FPL Chat Bot i Podsjetnik za Rok' je pukao. Provjeri Actions log na GitHubu."
+            -d text="⚠️ FPL Bot: workflow 'FPL Podsjetnik za Rok' je pukao. Provjeri Actions log na GitHubu."
