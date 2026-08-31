@@ -1,13 +1,16 @@
 """
 common.py - dijeljene funkcije za sve dijelove FPL bota.
 Koristi samo Python standardnu biblioteku (bez vanjskih paketa) osim gdje
-je izričito naznačeno (youtube_transcript_api u video_sources.py).
+je izričito naznačeno (youtube_transcript_api u video_sources.py, requests
+za slanje slika na Telegram).
 """
 
 import os
 import sys
 import json
 import html
+import time
+import socket
 import datetime as dt
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -23,26 +26,52 @@ SONNET_MODEL = "claude-sonnet-5"
 
 
 # --------------------------------------------------------------------------
-# Niska razina - HTTP
+# Niska razina - HTTP (s automatskim ponovnim pokušajem kod mrežnih grešaka)
 # --------------------------------------------------------------------------
+
+def _retry_request(fn, max_attempts=3, base_delay=2):
+    """Poziva fn() uz automatski ponovni pokušaj kod privremenih mrežnih
+    grešaka (reset veze, timeout, privremeni 5xx) - da jedan 'hiccup' na
+    mreži ne sruši cijeli bot."""
+    last_err = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            return fn()
+        except HTTPError as e:
+            last_err = e
+            if e.code < 500:  # 4xx greške (npr. 404, 401) nema smisla ponavljati
+                raise
+        except (URLError, socket.timeout, ConnectionError) as e:
+            last_err = e
+        if attempt < max_attempts:
+            print(f"[mrežno upozorenje] Pokušaj {attempt}/{max_attempts} nije uspio ({last_err}), pokušavam ponovno za {base_delay}s...")
+            time.sleep(base_delay)
+            base_delay *= 2
+    raise last_err
+
 
 def http_get_json(url, headers=None):
     h = {"User-Agent": UA, "Accept": "application/json"}
     if headers:
         h.update(headers)
-    req = Request(url, headers=h)
-    with urlopen(req, timeout=25) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+
+    def _do():
+        req = Request(url, headers=h)
+        with urlopen(req, timeout=25) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    return _retry_request(_do)
 
 
 def http_get_text(url, headers=None):
     h = {"User-Agent": UA}
     if headers:
         h.update(headers)
-    req = Request(url, headers=h)
-    with urlopen(req, timeout=25) as resp:
-        raw = resp.read()
-        return raw.decode("utf-8", errors="replace")
+
+    def _do():
+        req = Request(url, headers=h)
+        with urlopen(req, timeout=25) as resp:
+            return resp.read().decode("utf-8", errors="replace")
+    return _retry_request(_do)
 
 
 def http_post_json(url, payload, headers=None):
@@ -50,9 +79,12 @@ def http_post_json(url, payload, headers=None):
     if headers:
         h.update(headers)
     data = json.dumps(payload).encode("utf-8")
-    req = Request(url, data=data, headers=h, method="POST")
-    with urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+
+    def _do():
+        req = Request(url, data=data, headers=h, method="POST")
+        with urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    return _retry_request(_do)
 
 
 # --------------------------------------------------------------------------
@@ -205,9 +237,12 @@ def get_telegram_file_bytes(bot_token, file_id):
     info = http_get_json(f"https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}")
     file_path = info["result"]["file_path"]
     url = f"https://api.telegram.org/file/bot{bot_token}/{file_path}"
-    req = Request(url, headers={"User-Agent": UA})
-    with urlopen(req, timeout=30) as resp:
-        data = resp.read()
+
+    def _do():
+        req = Request(url, headers={"User-Agent": UA})
+        with urlopen(req, timeout=30) as resp:
+            return resp.read()
+    data = _retry_request(_do)
     ext = file_path.rsplit(".", 1)[-1].lower() if "." in file_path else "jpg"
     mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp"}.get(ext, "image/jpeg")
     return data, mime
