@@ -5,6 +5,12 @@ Puni pregled: ozljede, cijene, forma, preporuke po poziciji, raspored,
 dvostruki/prazni gameweekovi, chip savjeti, i (ako je postavljen
 FPL_TEAM_ID) osnovna analiza tvoje ekipe s heurističkim prijedlozima
 transfera (bez AI poziva - besplatno, temelji se samo na FPL podacima).
+
+NAPOMENA o poznatom ograničenju: FPL-ov javni API pokazuje tvoju postavu
+onakvu kakva je bila ZAKLJUČANA za zadnji prošli rok, ne transfere koje si
+napravio/la NAKON tog roka za idući gameweek (FPL to jednostavno ne otkriva
+javno bez prijave). Ako si nedavno mijenjao/la ekipu, koristi chat i pošalji
+screenshot trenutne postave umjesto da se oslanjaš na ovaj automatski dio.
 """
 
 import os
@@ -16,6 +22,34 @@ from common import (
     upcoming_fixtures_by_team, avg_difficulty, score_players,
     fetch_team_squad, send_telegram, POS_LABEL,
 )
+
+
+def build_transfer_suggestions(squad_data, players):
+    """Za svaku 'slabu kariku' u prvih 11 predlaže zamjenu - ali NIKAD igrača
+    kojeg korisnik već posjeduje (bilo gdje u 15-orici), i NIKAD istog igrača
+    dva puta kao prijedlog za dvije različite pozicije."""
+    starters = [s for s in squad_data["squad"] if s["position"] <= 11]
+    owned_ids = {s["player"]["id"] for s in squad_data["squad"] if s["player"]}
+    used_replacement_ids = set()
+
+    weak = []
+    for s in starters:
+        p = s["player"]
+        pool = sorted(
+            [pp for pp in players
+             if pp["element_type"] == p["element_type"]
+             and pp["_available"]
+             and pp["id"] not in owned_ids
+             and pp["id"] not in used_replacement_ids],
+            key=lambda pp: pp["_score"], reverse=True,
+        )
+        best = pool[0] if pool else None
+        gap = (best["_score"] - p["_score"]) if best else 0
+        if gap > 3 and (p["_form"] < 3.5 or p["_fdr"] >= 3.6 or not p["_available"]):
+            weak.append((p, best))
+            if best:
+                used_replacement_ids.add(best["id"])
+    return weak
 
 
 def build_message(bootstrap, fixtures):
@@ -109,16 +143,7 @@ def build_message(bootstrap, fixtures):
             info = squad_data["info"]
             lines.append(f"<b>👤 MOJA EKIPA — {esc(info.get('name', ''))}</b>")
             lines.append(f"Bodovi ukupno: {info.get('summary_overall_points')} · Rang: {info.get('summary_overall_rank')}")
-            starters = [s for s in squad_data["squad"] if s["position"] <= 11]
-            weak = []
-            for s in starters:
-                p = s["player"]
-                pool = sorted([pp for pp in players if pp["element_type"] == p["element_type"] and pp["_available"]],
-                               key=lambda pp: pp["_score"], reverse=True)
-                best = pool[0] if pool else None
-                gap = (best["_score"] - p["_score"]) if best else 0
-                if gap > 3 and (p["_form"] < 3.5 or p["_fdr"] >= 3.6 or not p["_available"]):
-                    weak.append((p, best))
+            weak = build_transfer_suggestions(squad_data, players)
             if weak:
                 lines.append("Brzi prijedlozi transfera:")
                 for p, best in weak[:4]:
@@ -132,7 +157,9 @@ def build_message(bootstrap, fixtures):
     lines.append("Wildcard: kad struktura tima ne odgovara idućim kolima. Bench Boost: kad cijela klupa ima "
                   "dobre fixtureve. Triple Captain: lagan fixture ili dvostruki GW. Free Hit: za prazni gameweek.")
     lines.append("")
-    lines.append("<i>Napomena: preporuke i FDR su naša heuristika iz FPL API podataka, ne kladioničke kvote.</i>")
+    lines.append("<i>Napomena: preporuke i FDR su naša heuristika iz FPL API podataka, ne kladioničke kvote. "
+                  "Postava odražava zadnji zaključani rok - ako si nedavno mijenjao/la tim, pošalji botu "
+                  "screenshot za točniju sliku.</i>")
 
     return "\n".join(lines)
 
