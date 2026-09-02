@@ -13,7 +13,12 @@ bot čeka unedogled (utakmica se može odgoditi i za mjesece).
 
 Sadržaj: pregled prošlog kola + konsenzus analitičara (iz članaka/videa
 prikupljenih tijekom tjedna) + personalizirani AI prijedlog za tvoju ekipu
-(jači model - Sonnet) + pregled idućeg kola.
+(jači model - Sonnet) + pregled idućeg kola + grafikon ranga/vrijednosti.
+
+NAPOMENA o poznatom ograničenju: FPL-ov javni API pokazuje tvoju postavu
+onakvu kakva je bila zaključana za zadnji prošli rok, ne transfere napravljene
+nakon tog roka. Ako si nedavno mijenjao/la ekipu, koristi chat i pošalji
+screenshot trenutne postave za točniju sliku.
 """
 
 import os
@@ -88,6 +93,7 @@ def build_consensus_and_advice(api_key, weekly_summaries, squad_data, players, t
     advice_text = None
     if squad_data and api_key:
         starters = [s for s in squad_data["squad"] if s["position"] <= 11]
+        owned_names = ", ".join(s["player"]["web_name"] for s in squad_data["squad"] if s["player"])
         squad_desc = "; ".join(
             f"{s['player']['web_name']} ({s['player']['_pos']}, forma {s['player']['_form']:.1f}, "
             f"FDR {s['player']['_fdr']:.1f})" for s in starters
@@ -95,10 +101,14 @@ def build_consensus_and_advice(api_key, weekly_summaries, squad_data, players, t
         summaries_short = "\n".join(f"[{s['source']}] {s['summary']}" for s in weekly_summaries[-15:])
         prompt = (
             f"Moja trenutna postava (11): {squad_desc}\n\n"
+            f"SVI igrači koje već posjedujem (15-orica, uključujući klupu): {owned_names}\n\n"
             f"Mišljenja analitičara ovaj tjedan:\n{summaries_short}\n\n"
             "Na temelju MOJE postave, FPL podataka o formi/fixtureima, i mišljenja analitičara, "
             "daj mi 2-4 konkretna prijedloga za idući gameweek na hrvatskom "
             "(transferi, kapetan, i eventualno chip ako je trenutak za to). "
+            "VAŽNO: nikad ne predlaži kao 'novi transfer' igrača kojeg već posjedujem (vidi listu iznad) - "
+            "to bi bio besmislen prijedlog. Ako predlažeš transfer, predloži RAZLIČITOG igrača za svaku "
+            "poziciju koju mijenjaš, nikad istog igrača kao zamjenu na dva mjesta. "
             "Budi konkretan i kratak - liste, ne duga proza. Objasni ukratko 'zašto' za svaki prijedlog."
         )
         try:
@@ -160,7 +170,8 @@ def build_message(bootstrap, fixtures, current_event, unplayed, api_key, weekly_
         lines.append("")
 
     lines.append("<i>Konsenzus i prijedlozi su AI sažetak javno dostupnih analiza, ne financijski savjet. "
-                  "Provjeri i vlastitu procjenu prije poteza.</i>")
+                  "Postava odražava zadnji zaključani rok - ako si nedavno mijenjao/la tim, pošalji botu "
+                  "screenshot za točniju sliku.</i>")
 
     return "\n".join(lines)
 
@@ -192,7 +203,6 @@ def main():
     print("Šaljem na Telegram...")
     send_telegram(message, bot_token, chat_id)
 
-    # zapiši povijest ranga/vrijednosti i pošalji grafikon ako imamo dovoljno podataka
     team_id = os.environ.get("FPL_TEAM_ID", "").strip()
     if team_id:
         try:
@@ -203,7 +213,6 @@ def main():
             if squad_data:
                 info = squad_data["info"]
                 history = state.get("history", [])
-                # izbjegni duple unose za isto kolo ako se ovo ikad pokrene dvaput za isti gw
                 history = [h for h in history if h["gw"] != current_event["id"]]
                 history.append({
                     "gw": current_event["id"],
@@ -212,7 +221,7 @@ def main():
                     "points": info.get("summary_overall_points") or 0,
                 })
                 history.sort(key=lambda h: h["gw"])
-                state["history"] = history[-20:]  # zadnjih 20 kola je dovoljno
+                state["history"] = history[-20:]
 
                 chart_bytes = render_rank_value_chart(state["history"])
                 if chart_bytes:
