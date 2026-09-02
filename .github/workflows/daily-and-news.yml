@@ -4,9 +4,12 @@ on:
   schedule:
     # 1) Pun dnevni izvještaj - jednom dnevno u 08:00 UTC.
     - cron: "0 8 * * *"
-    # 2) Provjera novih videa/članaka - svaka 3 sata. Šalje poruku SAMO ako
-    #    ima nešto stvarno novo (inače tiho, bez spama).
-    - cron: "0 */3 * * *"
+    # 2) Provjera novih videa/članaka - SVAKIH 45 MIN (skraćeno s 3h).
+    #    Razlog: članci objavljeni tik prije utakmice (npr. "team news")
+    #    mogu postati zastarjeli ako se ne provjere dovoljno brzo - kraći
+    #    razmak smanjuje šansu da vijest stigne nakon što je utakmica
+    #    već završila. Šalje poruku SAMO ako ima nešto stvarno novo.
+    - cron: "*/45 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -58,7 +61,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          RSS_LOOKBACK_HOURS: "4"
+          FPL_TEAM_ID: ${{ secrets.FPL_TEAM_ID }}
+          RSS_LOOKBACK_HOURS: "2"
         run: python news_check.py
 
       - name: Spremi stanje (state.json)
