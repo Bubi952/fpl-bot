@@ -65,13 +65,21 @@ jobs:
           RSS_LOOKBACK_HOURS: "2"
         run: python news_check.py
 
-      - name: Spremi stanje (state.json)
+            - name: Spremi stanje (state.json)
         run: |
           git config user.name "fpl-bot"
           git config user.email "fpl-bot@users.noreply.github.com"
           git add state.json
-          git diff --staged --quiet || git commit -m "Ažuriraj stanje bota [skip ci]"
-          git push
+          if git diff --staged --quiet; then
+            echo "Nema promjena za spremiti."
+          else
+            git commit -m "Ažuriraj stanje [skip ci]"
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && break
+              echo "Push nije uspio, pokušavam ponovno ($i/5)..."
+              sleep $((RANDOM % 5 + 2))
+            done
+          fi
 
       - name: Javi na Telegram ako je nešto puklo
         if: failure()
