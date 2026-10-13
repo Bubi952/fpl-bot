@@ -2,9 +2,6 @@ name: FPL Podsjetnik za Rok
 
 on:
   schedule:
-    # Svakih 15 min - provjerava je li blizu gameweek rok (šalje samo
-    # jednom po roku, ~3h prije). Chat pitanja se sad rješavaju odvojeno,
-    # trenutno, preko Cloudflare webhooka (vidi chat-webhook.yml).
     - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
@@ -33,7 +30,7 @@ jobs:
           FPL_TEAM_ID: ${{ secrets.FPL_TEAM_ID }}
         run: python deadline_reminder.py
 
-            - name: Spremi stanje (state.json)
+      - name: Spremi stanje (state.json)
         run: |
           git config user.name "fpl-bot"
           git config user.email "fpl-bot@users.noreply.github.com"
