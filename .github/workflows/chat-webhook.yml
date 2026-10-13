@@ -2,8 +2,6 @@ name: FPL Chat Bot (Webhook)
 
 on:
   repository_dispatch:
-    # Cloudflare Worker šalje ovaj event čim Telegram webhook primi novu
-    # poruku - pokreće se gotovo trenutno (par sekundi), ne čeka raspored.
     types: [telegram_message]
   workflow_dispatch:
     inputs:
@@ -42,7 +40,7 @@ jobs:
           MSG_CAPTION: ${{ github.event.client_payload.caption }}
         run: python chat_bot.py
 
-            - name: Spremi stanje (state.json)
+      - name: Spremi stanje (state.json)
         run: |
           git config user.name "fpl-bot"
           git config user.email "fpl-bot@users.noreply.github.com"
