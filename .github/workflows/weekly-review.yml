@@ -2,9 +2,6 @@ name: FPL Tjedni Pregled
 
 on:
   schedule:
-    # Provjerava se svaki dan u 08:30 UTC, ali skripta sama odlučuje hoće
-    # li stvarno poslati poruku (samo ponedjeljak ako je sve odigrano, ili
-    # utorak kao sigurnosna mreža). Vidi weekly_review.py za punu logiku.
     - cron: "30 8 * * *"
   workflow_dispatch: {}
 
@@ -34,7 +31,7 @@ jobs:
           FPL_TEAM_ID: ${{ secrets.FPL_TEAM_ID }}
         run: python weekly_review.py
 
-            - name: Spremi stanje (state.json)
+      - name: Spremi stanje (state.json)
         run: |
           git config user.name "fpl-bot"
           git config user.email "fpl-bot@users.noreply.github.com"
